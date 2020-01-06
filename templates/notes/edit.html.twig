@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Notes{% endblock %}
+
+{% block body %}
+{{ include('base.html.twig') }}
+    <h1>Edit Notes</h1>
+
+    {{ include('notes/_form2.html.twig') }}
+
+    <a href="{{ path('notes_index') }}">back to list</a>
+
+    {{ include('notes/_delete_form.html.twig') }}
+        {{ include('footer.html.twig') }}    
+{% endblock %}

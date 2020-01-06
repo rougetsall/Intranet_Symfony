@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Matieres{% endblock %}
+
+{% block body %}
+{{ include('base.html.twig') }}
+    <h1>Edit Matieres</h1>
+   
+    {{ include('matieres/_form2.html.twig') }}
+
+    <a href="{{ path('matieres_index') }}">back to list</a>
+
+    {{ include('matieres/_delete_form.html.twig') }}
+        {{ include('footer.html.twig') }}    
+{% endblock %}

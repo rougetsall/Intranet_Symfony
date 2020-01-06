@@ -3,10 +3,121 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+     <body>
+        {% block body %}
+           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="/"> Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                {% if is_granted('ROLE_USER_PROF') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('matieres_matieres_prof') }}">Matieres <span class="sr-only">(current)</span></a>
+                    </li>
+                 {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('matieres_index') }}">Matieres <span class="sr-only">(current)</span></a>
+                </li>
+                 {% endif %}
+                {% if is_granted('ROLE_USER_ETUDIANT') %}
+                   <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('matieres_matiere') }}">Mes matieres <span class="sr-only">(current)</span></a>
+                   </li>
+                {% endif %}
+                {% if is_granted('ROLE_USER_PROF') %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('liste') }}">liste des Etudiants <span class="sr-only">(current)</span></a>
+                  </li>
+                   <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('notes_index') }}">Notes <span class="sr-only">(current)</span></a>
+                  </li>
+                {% else %}
+                  {% if is_granted('ROLE_ADMIN') %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('liste') }}">liste des Etudiants <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('liste_prof') }}">liste des Prof <span class="sr-only">(current)</span></a>
+                  </li>
+                  
+                  {% endif %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('notes_index') }}">Notes <span class="sr-only">(current)</span></a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> {{ app.user.nom }} {{ app.user.niveau }}</a>
+                    
+                </li>
+                </ul>
+
+                <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                 
+                </li>
+                <li class="nav-item">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"> Administrateur</a>
+                   
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}" tabindex="-1" aria-disabled="true">Déconnexion</a>
+                </li>
+                </ul>
+               
+            </div>
+            </nav>
+            {% else %}
+            
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="/"> Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Doc</a>
+                </li>
+                
+                
+                </ul>
+
+                <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                 
+                </li> 
+                 <li class="nav-item">
+
+                    <a class="nav-link" href="{{ path('app_register') }}" tabindex="-1" aria-disabled="true">Inscription</a>
+                </li>
+                
+                <li class="nav-item">
+
+                    <a class="nav-link" href="{{ path('app_login') }}" tabindex="-1" aria-disabled="true">Connexion</a>
+                </li>
+
+
+                </ul>
+               
+            </div>
+            </nav>
+                
+            {% endif %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

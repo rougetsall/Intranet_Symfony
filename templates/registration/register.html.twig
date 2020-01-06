@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+ {{ include('base.html.twig') }}
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.nom) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+            <div class="input-group mb-3">
+                     <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Acces</label>
+                     </div>
+                     <select class="custom-select" id="inputGroupSelect01" name="niveau_actif">
+                        <option selected value='pas_niveau'>Niveau</option>
+                        
+                         <option  value='Licence 1'><h3>Licence 1 </h3></option>
+                         <option  value='Licence 2'><h3>Licence 2</h3></option>
+                         <option  value='Licence 3'><h3>Licence 3</h3></option>
+                         <option  value='prof'><h3>prof</h3></option>
+        
+                     </select>
+                    
+            </div>   
+        <button class="btn btn-lg btn-primary">Register</button>
+    {{ form_end(registrationForm) }}
+        {{ include('footer.html.twig') }}    
+{% endblock %}

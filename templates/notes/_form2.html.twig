@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+ <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Matiere</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="matieres">
+        <option selected value='0'>choix matiere</option>
+        {% for matieres in matieres %}
+            <option  value='{{ matieres.matiere }}'><h3>{{matieres.matiere}}</h3></option>
+        {% endfor %}
+        </select>
+                    
+     </div> 
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">nom etudiant</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="nom_etudiant">
+        <option selected value='0'>nom</option>
+        {% for liste in liste %}
+            <option  value='{{ liste.nom }}'><h3>{{liste.nom}}</h3></option>
+        {% endfor %}
+        </select>
+                    
+     </div> 
+    {{ form_widget(form) }}
+    
+    <button class="btn btn-primary">{{ button_label|default('Update') }}</button>
+{{ form_end(form) }}

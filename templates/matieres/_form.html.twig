@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Proffesseur</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="prof">
+        <option selected value='0'>choix prof</option>
+        {% for prof in prof %}
+            <option  value='{{ prof.nom }}'><h3>{{prof.nom}}</h3></option>
+        {% endfor %}
+        </select>
+                    
+     </div>  
+    <div class="input-group mb-3">
+                     <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Classe</label>
+                     </div>
+                     <select class="custom-select" id="inputGroupSelect01" name="classe">
+                        <option selected value='pas_classe'>choix</option>
+                        
+                         <option  value='Licence 1'><h3>Licence 1 </h3></option>
+                         <option  value='Licence 2'><h3>Licence 2</h3></option>
+                         <option  value='Licence 3'><h3>Licence 3</h3></option>
+                        
+        
+                     </select>
+                    
+            </div>   
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matieres index{% endblock %}
+
+{% block body %}
+{{ include('base.html.twig') }}
+    <h1>Matieres</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+              
+                <th>Matiere</th>
+               
+                <th>Professeur<th>
+                {% if is_granted('ROLE_ADMIN') %}
+                   <th>Classe</th>
+               
+                    <th>actions</th>
+                    
+               {% endif %}
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for matiere in matieres %}
+            <tr>
+                
+                <td>{{ matiere.matiere }}</td>
+                
+                <td>{{ matiere.professeur }}</td>
+                <td></td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td>{{ matiere.classe }}</td>
+              
+                    <td>
+                    <a href="{{ path('matieres_show', {'id': matiere.id}) }}">show</a>
+                    <a href="{{ path('matieres_edit', {'id': matiere.id}) }}">edit</a>
+                   </td>
+               {% endif %}
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+       <a href="{{ path('matieres_new') }}">Create new</a>
+    {% endif %}
+    {{ include('footer.html.twig') }}    
+{% endblock %}
