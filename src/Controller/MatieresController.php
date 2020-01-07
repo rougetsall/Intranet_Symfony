@@ -66,6 +66,30 @@ class MatieresController extends AbstractController
         }
         
     }
+    /**
+     * @Route("/etudiant", name="matieres_etudiant", methods={"GET"})
+    */
+    public function matiere_etudiant(MatieresRepository $matieresRepository,Request $request): Response
+    {
+        
+        if(in_array('ROLE_ADMIN', $this->getUser()->getRoles()))
+        {
+            if ($_GET['classe']=="prof") {
+                return $this->render('matieres/index.html.twig', [
+                    'matieres' => $matieresRepository->findBy(
+                    ["professeur"=>$_GET['professeur']])
+                ]);
+            }
+            else {
+                return $this->render('matieres/index.html.twig', [
+                    'matieres' => $matieresRepository->findBy(
+                    ["classe"=>$_GET['classe']])
+                ]);
+            }
+            
+        }
+        
+    }
 
     /**
      * @Route("/new", name="matieres_new", methods={"GET","POST"})
@@ -105,7 +129,8 @@ class MatieresController extends AbstractController
             'matiere' => $matiere,
         ]);
     }
-
+    
+    
     /**
      * @Route("/{id}/edit", name="matieres_edit", methods={"GET","POST"})
      */
