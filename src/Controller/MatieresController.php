@@ -77,7 +77,7 @@ class MatieresController extends AbstractController
             if ($_GET['classe']=="prof") {
                 return $this->render('matieres/index.html.twig', [
                     'matieres' => $matieresRepository->findBy(
-                    ["professeur"=>$_GET['professeur']])
+                    ["professeur"=>$_GET['nom']])
                 ]);
             }
             else {
